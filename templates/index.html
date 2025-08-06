@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Imgrate Demo</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 2rem;
+    }
+
+    input[type="file"] {
+      margin-top: 15px;
+      padding: 8px;
+      border-radius: 5px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    #preview {
+      margin-top: 20px;
+      max-width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #888;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #aaa;
+    }
+
+    .loading {
+      color: #007bff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Imgrate Image Optimizer</h1>
+  <p>Select an image (it will be compressed below your configured size):</p>
+
+  <input type="file" id="imgInput" accept="image/*" />
+  <div class="status" id="statusMsg"></div>
+
+  <img id="preview" alt="Optimized preview will appear here" hidden />
+
+  <div class="footer">Built with ❤️ by Imgrate</div>
+
+  <script src="/static/dropin.js"></script>
+</body>
+<script>
+  window.IMGRATE_MAX_SIZE_KB = 2048; // 👈 Choose any value
+</script>
+</html>
