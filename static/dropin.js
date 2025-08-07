@@ -4,6 +4,7 @@ document.getElementById("imgInput").onchange = async function () {
 
   // Use global config if present, else default to 300 KB
   const maxSizeKB = window.IMGRATE_MAX_SIZE_KB || 300;
+  const showPreview = window.IMGRATE_SHOW_PREVIEW ?? true; // Default: true
 
   const formData = new FormData();
   formData.append("image", file);
@@ -24,13 +25,29 @@ document.getElementById("imgInput").onchange = async function () {
 
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
-    document.getElementById("preview").src = url;
+
+    if (showPreview) {
+      let previewImg = document.getElementById("preview");
+      if (!previewImg) {
+        previewImg = document.createElement("img");
+        previewImg.id = "preview";
+        document.body.appendChild(previewImg);
+      }
+      previewImg.src = url;
+      previewImg.hidden = false;
+    }
 
     // Optional: log size
     blob.arrayBuffer().then((buffer) => {
       const sizeKB = (buffer.byteLength / 1024).toFixed(2);
       console.log(`Optimized to ${sizeKB} KB (target was ${maxSizeKB} KB)`);
     });
+
+    // Dispatch event if developer wants to use blob
+    const optimizedImageEvent = new CustomEvent("imgrate:optimized", {
+      detail: { blob, url, fileName: file.name },
+    });
+    document.dispatchEvent(optimizedImageEvent);
   } catch (err) {
     alert("Upload failed: " + err.message);
     console.error(err);
@@ -39,5 +56,4 @@ document.getElementById("imgInput").onchange = async function () {
   document.getElementById(
     "statusMsg"
   ).innerText = `✅ Optimized image below ${maxSizeKB} KB loaded.`;
-  document.getElementById("preview").hidden = false;
 };
