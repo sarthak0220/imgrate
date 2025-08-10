@@ -16,6 +16,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "templates/index.html"));
 });
+app.get("/test", (req, res) => {
+  res.sendFile(path.join(__dirname, "templates/index.html"));
+});
 
 // Multer memory storage to avoid saving original file
 const upload = multer({ storage: multer.memoryStorage() });
@@ -60,7 +63,7 @@ app.post("/optimize", upload.single("image"), async (req, res) => {
 });
 
 
-// Start server
+// Start server  
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
