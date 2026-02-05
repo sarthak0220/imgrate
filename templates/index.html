@@ -2,25 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Imgrate Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imgrate - Image Optimizer</title>
   <link rel="stylesheet" href="/static/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <h1>Imgrate Image Optimizer</h1>
-  <p>Select an image (it will be compressed below your configured size):</p>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <div class="logo-img"></div>
+        <span class="logo-text">Imgrate</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="signup-btn">Sign Up</button>
+    </div>
+  </nav>
 
-  <input type="file" id="imgInput" accept="image/*" />
-  <div class="status" id="statusMsg"></div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <h1 class="hero-title">Optimize Images for the Web</h1>
+      <p class="hero-subtitle">Fast, easy, and free. Compress JPGs and PNGs without quality loss.</p>
+      <button class="cta-btn" onclick="document.getElementById('optimizer').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+    </div>
+  </section>
 
-  <img id="preview" alt="Optimized preview will appear here" hidden />
+  <!-- Optimizer Section -->
+  <section class="optimizer-section" id="optimizer">
+    <div class="container">
+      <h2 class="section-title">Imgrate Image Optimizer</h2>
+      <p class="section-subtitle">Select an image (it will be compressed below your configured size).</p>
+      
+      <div class="upload-area" id="uploadArea">
+        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+        <p>Drag & Drop your image here or <label for="imgInput" class="choose-file">Choose File</label></p>
+        <input type="file" id="imgInput" accept="image/*" hidden />
+        <div class="upload-status" id="statusMsg"></div>
+      </div>
 
-  <div class="footer">Built with ❤️ by Imgrate</div>
+      <!-- Comparison Section (Hidden until image is uploaded) -->
+      <div class="comparison-wrapper" id="comparisonWrapper" style="display: none;">
+        <div class="image-comparison">
+          <div class="comparison-card">
+            <span class="badge badge-delete" onclick="resetOptimizer()">×</span>
+            <span class="label">Original Image</span>
+            <div class="image-preview">
+              <img src="" alt="Original" id="originalImg">
+            </div>
+            <div class="image-info">Size: <span id="originalSizeDisplay">0 KB</span></div>
+          </div>
+
+          <div class="comparison-card">
+            <span class="label">Optimized Image</span>
+            <div class="image-preview">
+              <img src="" alt="Optimized" id="optimizedImg">
+            </div>
+            <div class="image-info">Size: <span id="optimizedSizeDisplay">0 KB</span> <span class="savings" id="savingsPercent"></span></div>
+          </div>
+        </div>
+
+        <div class="size-summary">
+          <span><strong>Original Size:</strong> <span id="origSizeText">0 KB</span></span>
+          <span><strong>Optimized Size:</strong> <span id="optSizeText">0 KB</span></span>
+          <span><strong>Savings:</strong> <span id="savingsText" class="savings-highlight">0 KB</span></span>
+          <span><strong>Format:</strong> <span id="formatText">JPG</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Why Choose Imgrate?</h2>
+      <p class="section-subtitle">Powerful features for seamless image optimization</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>Lightning Fast Compression</h3>
+          <p>Compress JPG and converted, and easy to copy JPGs and PNGs without quality loss.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-gem"></i>
+          </div>
+          <h3>Lossless Quality</h3>
+          <p>Compress quality with fast, easy, and convenient, compress JPGs and PNGs tiniest quality loss.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3>Batch Processing</h3>
+          <p>Batch processing with fast process ceremonies to see all your stamps and batch instantaneously savings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Built with ❤️ by Imgrate</p>
+        <p class="copyright">Copyright 2022 Imgrate. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="/static/dropin.js"></script>
+  <script src="/static/main.js"></script>
 </body>
-<script>
-  window.IMGRATE_MAX_SIZE_KB = 50; // 👈 Choose any value
-   window.IMGRATE_SHOW_PREVIEW = false;
-   window.IMGRATE_UPLOAD_URL = "/comp";
-</script>
 </html>
