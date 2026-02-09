@@ -43,9 +43,13 @@ app.post("/optimize", upload.single("image"), async (req, res) => {
       }
     );
 
-    const ext = path.extname(req.file.originalname);
-    const base = path.basename(req.file.originalname, ext);
-    const outputPath = `uploads/${base}_${Date.now()}_compressed${ext}`;
+    const base = path.basename(
+      req.file.originalname,
+      path.extname(req.file.originalname)
+    );
+
+    // FastAPI always returns JPEG → save correctly
+    const outputPath = `uploads/${base}_${Date.now()}_compressed.jpg`;
 
     const buffer = fastapiRes.data; // Already binary
     const sizeKB = (buffer.length / 1024).toFixed(2);
