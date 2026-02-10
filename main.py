@@ -20,5 +20,11 @@ async def optimize_image(
 ):
     original = await image.read()
     optimized = process_image(original, max_size_kb=max_size_kb)
-    return StreamingResponse(io.BytesIO(optimized), media_type="image/jpeg")
+    return StreamingResponse(
+    io.BytesIO(optimized),
+    media_type="image/jpeg",
+    headers={
+        "Content-Disposition": "inline; filename=optimized.jpg"
+    }
+)
 
